@@ -70,13 +70,11 @@ sql_password = Pass1234
 ## sql server address 127.0.0.1 .... 
 sql_address = 127.0.0.1
 
-
 ## Default rate limit plan for users that not exists in database yet.
 ## first parameter is number of emails and the next one is time interval (Seconds) between user counter reset
 ## following parameters determine that users only can send 10 e-mails per 120 seconds
 ## note that if you change specific user by fixrate users command, this not effect that user anymore.  
 default_ratelimit =  10 120
-
 
 ## fixrate listening mode can be only unix or inet, if you want to connect this service over TCP protocol
 ## should use inet, for using unix socket files should unix be used. 
@@ -85,15 +83,13 @@ listener_type = unix
 ## config for unix listener type, ignored if use inet
 ## note that for some reasons postfix root path is under /var/spool/postfix/ directory,
 ## if you specify check_policy_service unix:/fixrate/fixrate.sock in main.cf file, postfix only looking
-## for socket file /ratelimit/fixrate.sock under /var/spool/postfix/ directory.
+## for socket file /fix/fixrate.sock under /var/spool/postfix/ directory.
 ## so socket file should be under /var/spool/postfix/
-## REMEMBER to mkdir directory /var/spool/postfix/ratelimit/ first
+## REMEMBER to mkdir directory /var/spool/postfix/fix/ first
 
 socket_path = /var/spool/postfix/fix/fixrate.sock
 ## socket file should be read and writable by both fixrate and postfix services.
 socket_perm = 666
-
-
 
 ## config for inet listener type ignored if use unix
 listen_addr = 127.0.0.1:9984
