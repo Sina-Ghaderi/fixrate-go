@@ -37,7 +37,7 @@ you may wnat to create a systemd file for runing this as a linux service (`syste
 
 ### config postfix and fixrate 
 fixrate-go supports unix socket and tcp network listeners, in order to reduce kernel opened connections its recommended to use unix socket if you can host fixrate on postfix server  
-default configuration file of fixrate is ./fixrate.go, you may want to specify another file path by using `--config` flag  
+default configuration file of fixrate is `./fixrate.conf`, you may want to specify another file path by using `--config` flag  
 
 ### preparing postfix server
 edit postfix mail agent config file under `/etc/postfix/main.cf` (debian based systems)
@@ -55,4 +55,46 @@ if planning to use unix file you should note that for some reasons postfix root 
 
 ### config fixrate-go service
 just use default config file in this package `fixrate.conf` and change it as you need.
+you should set MYSQL user/pass/database/address parameters in order to connect to sql server.
+if choosing to use unix or inet remember to set corresponding parameters followd by `listener_type =` literal.
+default fixrate config file `fixrate.conf`
+```
+## Mysql(or mariaDB) database to use 
+sql_database = postfix
+## sql connection port number
+sql_tcpport = 3306
+## sql username to connect database 
+sql_username = postfix
+## sql password to connect database
+sql_password = Pass1234
+## sql server address 127.0.0.1 .... 
+sql_address = 127.0.0.1
 
+
+## Default rate limit plan for users that not exists in database yet.
+## first parameter is number of emails and the next one is time interval (Seconds) between user counter reset
+## following parameters determine that users only can send 10 e-mails per 120 seconds
+## note that if you change specific user by fixrate users command, this not effect that user anymore.  
+default_ratelimit =  10 120
+
+
+## fixrate listening mode can be only unix or inet, if you want to connect this service over TCP protocol
+## should use inet, for using unix socket files should unix be used. 
+listener_type = unix
+
+## config for unix listener type, ignored if use inet
+## note that for some reasons postfix root path is under /var/spool/postfix/ directory,
+## if you specify check_policy_service unix:/fixrate/fixrate.sock in main.cf file, postfix only looking
+## for socket file /ratelimit/fixrate.sock under /var/spool/postfix/ directory.
+## so socket file should be under /var/spool/postfix/
+## REMEMBER to mkdir directory /var/spool/postfix/ratelimit/ first
+
+socket_path = /var/spool/postfix/fix/fixrate.sock
+## socket file should be read and writable by both fixrate and postfix services.
+socket_perm = 666
+
+
+
+## config for inet listener type ignored if use unix
+listen_addr = 127.0.0.1:9984
+```
