@@ -44,7 +44,7 @@ edit postfix mail agent config file under `/etc/postfix/main.cf` (debian based s
 if planning to use unix file you should note that for some reasons postfix root directory is under /var/spool/postfix so you should create fixrate-go socket file under this directory, otherwise you may facing with `warning: connect to <socket> no such a file or directory` warning in` mail.log` file 
 ```
 ## if using unix socket -->
-# echo "smtpd_sender_restrictions = reject_unknown_sender_domain, check_policy_service unix:/fix/fixrate-go.socks" >> /etc/postfix/main.cf
+# echo "smtpd_sender_restrictions = reject_unknown_sender_domain, check_policy_service unix:/fix/fixrate.sock" >> /etc/postfix/main.cf
 # mkdir /var/spool/postfix/fix
 # service postfix restart 
 
@@ -81,16 +81,23 @@ default_ratelimit =  10 120
 listener_type = unix
 
 ## config for unix listener type, ignored if use inet
-## note that for some reasons postfix root path is under /var/spool/postfix/ directory,
-## if you specify check_policy_service unix:/fixrate/fixrate.sock in main.cf file, postfix only looking
-## for socket file /fix/fixrate.sock under /var/spool/postfix/ directory.
-## so socket file should be under /var/spool/postfix/
+## socket file should be under /var/spool/postfix/ 
 ## REMEMBER to mkdir directory /var/spool/postfix/fix/ first
-
 socket_path = /var/spool/postfix/fix/fixrate.sock
+
 ## socket file should be read and writable by both fixrate and postfix services.
 socket_perm = 666
 
 ## config for inet listener type ignored if use unix
 listen_addr = 127.0.0.1:9984
 ```
+
+### screenshots
+![Screenshot](shot-pic.jpg)
+
+### licence and contact
+you are welcome to e-mail me, suggestions, bug reporting or anything else, ... use [sina@snix.ir](mailto://sina@snix.ir)
+
+Copyright (c) 2021 git.snix.ir, All rights reserved.
+Developed BY sina@snix.ir --> Sina Ghaderi  
+This work is licensed under the terms of the MIT license.
