@@ -56,7 +56,7 @@ if planning to use unix file you should note that for some reasons postfix root 
 ### config fixrate-go service
 just use default config file in this package `fixrate.conf` and change it as you need.
 you should set MYSQL user/pass/database/address parameters in order to connect to sql server.
-if choosing to use unix or inet remember to set corresponding parameters followd by `listener_type =` literal.
+if choosing to use unix or inet remember to set corresponding parameters followd by `listener_type =` literal.  
 default fixrate config file `fixrate.conf`
 ```
 ## Mysql(or mariaDB) database to use 
