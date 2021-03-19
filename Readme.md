@@ -93,7 +93,7 @@ listen_addr = 127.0.0.1:9984
 ```
 
 ### screenshots
-![Screenshot](shot-pic.jpg)
+![Screenshot](shot-pic.png)
 
 ### licence and contact
 you are welcome to e-mail me, suggestions, bug reporting or anything else, ... use [sina@snix.ir](mailto://sina@snix.ir)
