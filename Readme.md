@@ -40,8 +40,8 @@ fixrate-go supports unix socket and tcp network listeners, in order to reduce ke
 default configuration file of fixrate is `./fixrate.conf`, you may want to specify another file path by using `--config` flag  
 
 ### preparing postfix server
-edit postfix mail agent config file under `/etc/postfix/main.cf` (debian based systems)
-if planning to use unix file you should note that for some reasons postfix root directory is under /var/spool/postfix so you should create fixrate-go socket file under this directory, otherwise you may facing with `warning: connect to <socket> no such a file or directory` warning in` mail.log` file 
+edit postfix mail agent config file under `/etc/postfix/main.cf` (debian based systems)  
+if planning to use unix file you should note that for some reasons postfix root directory is under `/var/spool/postfix` so you need to create fixrate-go socket file under this directory, otherwise you may facing with `warning: connect to <socket> no such a file or directory` warning in` mail.log` file 
 ```
 ## if using unix socket -->
 # echo "smtpd_sender_restrictions = reject_unknown_sender_domain, check_policy_service unix:/fix/fixrate.sock" >> /etc/postfix/main.cf
