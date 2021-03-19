@@ -93,7 +93,8 @@ listen_addr = 127.0.0.1:9984
 ```
 
 ### screenshots
-an smart ass user, limited as below
+an smart ass user, limited as below  
+
 ![Screenshot](shot-pic.png)
 
 ### licence and contact
