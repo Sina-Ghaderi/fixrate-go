@@ -3,7 +3,7 @@ last night we figured out someone sending too many emails to our mailing servers
 fixrate applies sending rate limit per users, so you don't have to limit entire domain. from now on fixrate protects [mail.snix.ir](https://mail.snix.ir) service.  
 
 ### usege and installation
-fixrate is written in golang, so for compiling this code you should have `golang` installed  
+fixrate is written in golang, so for compiling this code you should have `golang` installed.  
 if not, use apt to installed `apt install golang`, after that clone this repository by useing either [git.snix.ir](https://git.snix.ir/fixrate-go) or github.com  
 ```
 # git clone https://git.snix.ir/fixrate-go.git
