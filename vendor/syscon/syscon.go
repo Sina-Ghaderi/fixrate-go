@@ -29,7 +29,7 @@ func StartNewService(conf *config.Config) {
 	l := lisfunc(conf)
 	defer l.Close()
 	syslog.InformGreen("connection to sql server established")
-	syn := regexp.MustCompile(`(^sasl_username=.*[^\s].*)$`)
+	syn := regexp.MustCompile(`(^sasl_username=((.*[^\s].*)|))$`)
 
 	for {
 		conn, err := l.Accept()
