@@ -49,6 +49,13 @@ func handlePostfixConn(conn net.Conn, syn *regexp.Regexp) {
 	for scanner.Scan() {
 		if find := syn.MatchString(scanner.Text()); find {
 			pureName := strings.ReplaceAll(scanner.Text(), "sasl_username=", "")
+			if pureName == "" {
+				if _, err := conn.Write([]byte("action=OK\n\n")); err != nil {
+					syslog.InformError(err)
+					return
+				}
+				continue
+			}
 			userAcc, err := datax.GetUserFromDatabase(&pureName)
 			if err != nil {
 				syslog.InformError(err)
